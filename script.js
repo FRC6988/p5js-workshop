@@ -2,11 +2,12 @@ var paddleX = 200;
 var paddleY = 200;
 
 var paddleWidth = 50;
-var paddleHeight = 10;
+var paddleHeight = 5;
 
 var ballX = 40;
 var ballY = 40;
-var ballRadius = 10;
+var ballDiameter = 10;
+var ballRadius = ballDiameter/2;
 
 var dx = 4;
 var dy = 8;
@@ -20,9 +21,9 @@ function drawPaddle(x, y, w, h){
   rect(x-w/2,y-h/2,w,h);
 }
 
-function drawBall(x,y,r){
+function drawBall(x,y,d){
   fill(255,0,0);
-  circle(x, y, r);
+  circle(x, y, d);
 }
 
 function checkCollision(){
@@ -32,7 +33,7 @@ function checkCollision(){
 
   if(ballY <=0){
     dy = -dy;
-  }else if(ballY+dy>=paddleY-paddleHeight/2 && ballY+dy<=paddleY+paddleHeight/2 && ballX+dx <= paddleX+paddleWidth/2 && ballX+dx>=paddleX-paddleWidth/2){
+  }else if(ballY>=paddleY-paddleHeight/2-ballRadius && ballY<=paddleY+paddleHeight/2+ballRadius && ballX+dx <= paddleX+paddleWidth/2 && ballX+dx>=paddleX-paddleWidth/2){
           dy = -dy;
           }
   
@@ -59,5 +60,5 @@ function draw() {
   paddleX = mouseX;
   paddleY = 350;
   drawPaddle(paddleX,paddleY,paddleWidth,paddleHeight);
-  drawBall(ballX, ballY, ballRadius);
+  drawBall(ballX, ballY, ballDiameter);
 }
